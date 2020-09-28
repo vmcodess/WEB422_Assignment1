@@ -36,27 +36,7 @@ app.post("/api/sales", async (req, res) => {
 
 });
 
-/**
- * EXAMPLE
- */
 
-// app.get("api/example", async (req, res) => { 
-
-//  const data = {data: "test"}
-//  await res.status(200).send(data)
-
-// })
-
-// app.post("api/example", async (req, res) => { 
-
-// const data = req.body 
-// await res.status(200).send(data)
-   
-// })
-   
-/** 
- * END EXAMPLE 
- */
 // GET /api/sales (NOTE: This route must accept the numeric query parameters "page" and "perPage", ie: /api/sales?page=1&perPage=5 )    // getAllSales
 
 app.get("/api/sales", async (req,res) => {
