@@ -38,12 +38,11 @@ const HTTP_PORT = process.env.PORT || 8080;
 // POST /api/sales (NOTE: This route must read the contents of the request body) // addNewSale 
 app.post("/api/sales", async (req, res) => {
 
- await myData.addNewSale().then(results => { 
+    await myData.addNewSale().then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
         res.status(500).send(err) 
     })
-
 });
 
 
@@ -51,7 +50,7 @@ app.post("/api/sales", async (req, res) => {
 
 app.get("/api/sales", async (req,res) => {
 
-     await myData.getAllSales(1, 100).then(results => {
+     await myData.getAllSales(1, 10).then(results => {
         res.status(200).send(results)
     }).catch(err => {
         res.status(500).send(err)
@@ -88,6 +87,7 @@ app.get("/api/sales/:id", async (req, res) => {
 app.put("/api/sales/:id", async (req, res) => {
     let id = req.params.id;
     let data = req.body
+
     await myData.updateSaleById(data, id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
