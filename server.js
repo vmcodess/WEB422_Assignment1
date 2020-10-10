@@ -6,7 +6,7 @@
 *
 * Name: Vladislav Matveev Student ID:032112138 Date: September 28, 2020
 * Heroku Link: https://web422-assmt1.herokuapp.com/
-* *** just add api/sales
+* *** just add /api/sales
 *
 ********************************************************************************/
 
@@ -20,6 +20,7 @@ const cors = require("cors");
 //const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dataService = require("./modules/data-service.js");
+const main = require("./js/main.js");
 
 const myData = dataService(process.env.MONGO_DB_URL);
 
@@ -47,23 +48,10 @@ app.post("/api/sales", async (req, res) => {
 
 
 // GET /api/sales (NOTE: This route must accept the numeric query parameters "page" and "perPage", ie: /api/sales?page=1&perPage=5 )    // getAllSales
-
 app.get("/api/sales", async (req,res) => {
 
-     await myData.getAllSales(1, 10).then(results => {
-        res.status(200).send(results)
-    }).catch(err => {
-        res.status(500).send(err)
-    })
-});
-
-app.get("/api/sales/:page/:perPage", async (req,res) => {
-
-    let page = req.params.page;
-    let perPage = req.params.perPage;
-
-    await myData.getAllSales(page, perPage).then(results => {
-        res.status(200).send(results)
+    await myData.getAllSales(req.query.page, req.query.perPage).then(results => {
+        res.status(200).send(main)
     }).catch(err => {
         res.status(500).send(err)
     })
@@ -73,9 +61,7 @@ app.get("/api/sales/:page/:perPage", async (req,res) => {
 // GET /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8) // getSalebyId
 app.get("/api/sales/:id", async (req, res) => {
 
-    let id = req.params.id;
-
-    await myData.getSaleById(id).then(results => { 
+    await myData.getSaleById(req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
         res.status(500).send(err) 
@@ -85,10 +71,8 @@ app.get("/api/sales/:id", async (req, res) => {
 
 // PUT /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8 as well as read the contents of the request body) // updateSaleById
 app.put("/api/sales/:id", async (req, res) => {
-    let id = req.params.id;
-    let data = req.body
 
-    await myData.updateSaleById(data, id).then(results => { 
+    await myData.updateSaleById(req.body, req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
         res.status(500).send(err) 
@@ -98,10 +82,8 @@ app.put("/api/sales/:id", async (req, res) => {
 
 // DELETE /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8)  //deleteSale
 app.delete("/api/sales/:id", async (req, res) => {
-    let id = req.params.id;
-    console.log(req);
 
-    await myData.deleteSaleById(id).then(results => { 
+    await myData.deleteSaleById(req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
         res.status(500).send(err) 
