@@ -20,7 +20,6 @@ const cors = require("cors");
 //const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const dataService = require("./modules/data-service.js");
-const main = require("./js/main.js");
 
 const myData = dataService(process.env.MONGO_DB_URL);
 
@@ -49,7 +48,7 @@ app.post("/api/sales", async (req, res) => {
 // GET /api/sales (NOTE: This route must accept the numeric query parameters "page" and "perPage", ie: /api/sales?page=1&perPage=5 )    // getAllSales
 app.get("/api/sales", async (req,res) => {
     await myData.getAllSales(req.query.page, req.query.perPage).then(results => {
-        res.status(200).send(main)
+        res.status(200).send(results)
     }).catch(err => {
         res.status(500).send(err)
     })
