@@ -3,18 +3,16 @@
 // const PER_PAGE = 10;    // This will be a CONST value that we will use to reference how many sale items we wish to view on each page of our application
 
 // // Lodash Template (This will be a CONST value that consists of solely of a Lodash template ( defined using the _.template() function ))
-// const SALE_TABLE_TEMPLATE = _.template(
-//     `<% _.forEach(data, function(sale) { %> 
+// const SALE_TABLE_TEMPLATE = _.template(`
+//     <% _.forEach(data, function(sale) { %> 
 //         <tr data-id="<%- sale._id %>">
 //             <td><%- sale.customer.email %></td>
 //             <td><%- sale.storeLocation %></td>
 //             <td><%- sale.items.length %></td> 
 //             <td><%- moment(sale.saleDate).format('LLLL') %></td>
 //         </tr> 
-//     <% }) %>`
-// );
-
-
+//     <% }) %>
+// `);
 
 // // This template must provide all of the layout and formatting for the content contained within our modal window for a specific "sale"
 // const saleModelBodyTemplate = _.template(`
@@ -48,20 +46,19 @@
 // // Function to populate the saleDatta array with data from our API created in ASS1 (on heroku)
 // function loadSaleData() {
 //     fetch(`https://web422-assmt1.herokuapp.com/api/sales/?page=${page}&perPage=${PER_PAGE}`)
-//     .then(response => response.json())
+//     .then((response) => response.json())
 //     .then((data) => {
-
 //         saleData = data;
-//         $("#sales-table tbody").html(SALE_TABLE_TEMPLATE({ data:saleData }));
-//         $("#current-page").html(`${page}`);
-//     })
-//     .catch((error) => {
-//         console.log(`Error to fetch: ${error}`)
-//     })
+//         $("#sales-table tbody").html(SALE_TABLE_TEMPLATE({ data : saleData }));
+//         $("#current-page").html(page);
+//     });
+//     // .catch((error) => {
+//     //     console.log(`Error to fetch: ${error}`)
+//     // })
 // };
 
 
-// $( document ).ready(function() {
+// $(function() {
 //     // invoking loadSaleData() function to populate our table with the data
 //     loadSaleData();
 

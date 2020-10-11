@@ -6,7 +6,7 @@
 *
 * Name: Vladislav Matveev Student ID:032112138 Date: September 28, 2020
 * Heroku Link: https://web422-assmt1.herokuapp.com/
-* *** just add /api/sales
+* 
 *
 ********************************************************************************/
 
@@ -38,7 +38,6 @@ const HTTP_PORT = process.env.PORT || 8080;
 
 // POST /api/sales (NOTE: This route must read the contents of the request body) // addNewSale 
 app.post("/api/sales", async (req, res) => {
-
     await myData.addNewSale().then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
@@ -49,7 +48,6 @@ app.post("/api/sales", async (req, res) => {
 
 // GET /api/sales (NOTE: This route must accept the numeric query parameters "page" and "perPage", ie: /api/sales?page=1&perPage=5 )    // getAllSales
 app.get("/api/sales", async (req,res) => {
-
     await myData.getAllSales(req.query.page, req.query.perPage).then(results => {
         res.status(200).send(main)
     }).catch(err => {
@@ -60,7 +58,6 @@ app.get("/api/sales", async (req,res) => {
 
 // GET /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8) // getSalebyId
 app.get("/api/sales/:id", async (req, res) => {
-
     await myData.getSaleById(req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
@@ -71,7 +68,6 @@ app.get("/api/sales/:id", async (req, res) => {
 
 // PUT /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8 as well as read the contents of the request body) // updateSaleById
 app.put("/api/sales/:id", async (req, res) => {
-
     await myData.updateSaleById(req.body, req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
@@ -82,7 +78,6 @@ app.put("/api/sales/:id", async (req, res) => {
 
 // DELETE /api/sales (NOTE: This route must accept a numeric route parameter, ie: /api/sales/5bd761dcae323e45a93ccfe8)  //deleteSale
 app.delete("/api/sales/:id", async (req, res) => {
-
     await myData.deleteSaleById(req.params.id).then(results => { 
         res.status(200).send(results) 
     }).catch(err => { 
